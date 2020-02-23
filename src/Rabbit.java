@@ -35,13 +35,13 @@ public class Rabbit implements Serializable {
      * Create a new rabbit. A rabbit may be created with age
      * zero (a new born) or with a random age.
      * 
-     * @param randomAge If true, the rabbit will have a random age.
+     * @param startWithRandomAge If true, the rabbit will have a random age.
      */
-    public Rabbit(boolean randomAge)
+    public Rabbit(boolean startWithRandomAge)
     {
         age = 0;
         alive = true;
-        if(randomAge) {
+        if(startWithRandomAge) {
             age = (int)(Math.random()*MAX_AGE);
         }
     }
@@ -50,16 +50,16 @@ public class Rabbit implements Serializable {
      * This is what the rabbit does most of the time - it runs 
      * around. Sometimes it will breed or die of old age.
      * @param updatedField The field to transfer to.
-     * @param newRabbits A list to add newly born rabbits to.
+     * @param babyRabbitStorage A list to add newly born rabbits to.
      */
-    public void run(Field updatedField, List<Rabbit> newRabbits)
+    public void run(Field updatedField, List<Rabbit> babyRabbitStorage)
     {
         incrementAge();
         if(alive) {
             int births = breed();
             for(int b = 0; b < births; b++) {
                 Rabbit newRabbit = new Rabbit(false);
-                newRabbits.add(newRabbit);
+                babyRabbitStorage.add(newRabbit);
                 Location loc = updatedField.randomAdjacentLocation(location);
                 newRabbit.setLocation(loc);
                 updatedField.put(newRabbit, loc);

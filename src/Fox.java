@@ -38,13 +38,13 @@ public class Fox implements Serializable {
 	 * Create a fox. A fox can be created as a new born (age zero and not
 	 * hungry) or with random age.
 	 * 
-	 * @param randomAge
+	 * @param startWithRandomAge
 	 *            If true, the fox will have random age and hunger level.
 	 */
-	public Fox(boolean randomAge) {
+	public Fox(boolean startWithRandomAge) {
 		age = 0;
 		alive = true;
-		if (randomAge) {
+		if (startWithRandomAge) {
 			age = (int)(Math.random()*MAX_AGE);
 			foodLevel = (int)(Math.random()*RABBIT_FOOD_VALUE);
 		} else {
@@ -61,10 +61,10 @@ public class Fox implements Serializable {
 	 *            The field currently occupied.
 	 * @param updatedField
 	 *            The field to transfer to.
-	 * @param newFoxes
+	 * @param babyFoxStorage
 	 *            A list to add newly born foxes to.
 	 */
-	public void hunt(Field currentField, Field updatedField, List<Fox> newFoxes) {
+	public void hunt(Field currentField, Field updatedField, List<Fox> babyFoxStorage) {
 		incrementAge();
 		incrementHunger();
 		if (alive) {
@@ -73,7 +73,7 @@ public class Fox implements Serializable {
 			for (int b = 0; b < births; b++) {
 				Fox newFox = new Fox(false);
 				newFox.setFoodLevel(this.foodLevel);
-				newFoxes.add(newFox);
+				babyFoxStorage.add(newFox);
 				Location loc = updatedField.randomAdjacentLocation(location);
 				newFox.setLocation(loc);
 				updatedField.put(newFox, loc);
@@ -148,11 +148,11 @@ public class Fox implements Serializable {
 	 * @return The number of births (may be zero).
 	 */
 	private int breed() {
-		int births = 0;
+		int numBirths = 0;
 		if (canBreed() && Math.random() <= BREEDING_PROBABILITY) {
-			births = (int)(Math.random()*MAX_LITTER_SIZE) + 1;
+			numBirths = (int)(Math.random()*MAX_LITTER_SIZE) + 1;
 		}
-		return births;
+		return numBirths;
 	}
 
 	/**
