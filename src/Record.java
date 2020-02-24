@@ -4,6 +4,7 @@
  */
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /***
@@ -13,29 +14,29 @@ import java.util.List;
  * This class not required to actually run the simulator
  */
 public class Record implements Serializable{
-    private List<Rabbit> rabbits;
-    private List<Fox> foxes;
+    private ArrayList<Rabbit> rabbits;
+    private ArrayList<Fox> foxes;
     private int steps;
     
     // The current state of the field.
     private Field field;
     
-	public Record(List<Rabbit> r, List<Fox> f, Field field, int step){
+	public Record(ArrayList<Rabbit> r, ArrayList<Fox> f, Field field, int step){
 		setRabbits(r);
 		setFoxes(f);
 		setField(field);
 		setSteps(step);
 	}
-	public List<Rabbit> getRabbits() {
+	public ArrayList<Rabbit> getRabbits() {
 		return rabbits;
 	}
-	public void setRabbits(List<Rabbit> rabbits) {
+	public void setRabbits(ArrayList<Rabbit> rabbits) {
 		this.rabbits = rabbits;
 	}
-	public List<Fox> getFoxes() {
+	public ArrayList<Fox> getFoxes() {
 		return foxes;
 	}
-	public void setFoxes(List<Fox> foxes) {
+	public void setFoxes(ArrayList<Fox> foxes) {
 		this.foxes = foxes;
 	}
 	public Field getField() {
