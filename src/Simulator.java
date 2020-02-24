@@ -33,8 +33,8 @@ public class Simulator {
 
 	// Lists of animals in the field. Separate lists are kept for ease of
 	// iteration.
-	private List<Rabbit> rabbitList;
-	private List<Fox> foxList;
+	private ArrayList<Rabbit> rabbitList;
+	private ArrayList<Fox> foxList;
 
 	// The current state of the field.
 	private Field field;
@@ -142,7 +142,7 @@ public class Simulator {
 		step++;
 
 		// New List to hold newborn rabbitList.
-		List<Rabbit> babyRabbitStorage = new ArrayList<Rabbit>();
+		ArrayList<Rabbit> babyRabbitStorage = new ArrayList<Rabbit>();
 
 		// Loop through all Rabbits. Let each run around.
 		for (int i = 0; i < rabbitList.size(); i++) {
@@ -158,7 +158,7 @@ public class Simulator {
 		rabbitList.addAll(babyRabbitStorage);
 
 		// Create new list for newborn foxList.
-		List<Fox> babyFoxStorage = new ArrayList<Fox>();
+		ArrayList<Fox> babyFoxStorage = new ArrayList<Fox>();
 
 		// Loop through Foxes; let each run around.
 		for (int i = 0; i < foxList.size(); i++) {
@@ -284,20 +284,36 @@ public class Simulator {
 		}
 	}
 
+	/***
+	 * Set the step number of the simulator.  (Used for restoring saved games).
+	 * @param steps
+	 */
 	private void setStep(int steps) {
 		step = steps;
 	}
 
-	private void setField(Field field2) {
-		field = field2;
+	/***
+	 * Sets the field of the simulator.  (Used for restoring saved games).
+	 * @param newField
+	 */
+	private void setField(Field newField) {
+		field = newField;
 	}
 
-	private void setRabbitList(List<Rabbit> rabbits2) {
-		rabbitList = rabbits2;
+	/***
+	 * Sets the list of rabbits.  Used for restoring saved games.
+	 * @param newRabbitList
+	 */
+	private void setRabbitList(ArrayList<Rabbit> newRabbitList) {
+		rabbitList = newRabbitList;
 	}
 
-	private void setFoxList(List<Fox> foxes2) {
-		foxList = foxes2;
+	/***
+	 * Sets the list of foxes.  Used for restoring saved games.
+	 * @param newFoxesList
+	 */
+	private void setFoxList(ArrayList<Fox> newFoxesList) {
+		foxList = newFoxesList;
 	}
 
 	// Perform an action when the mouse was clicked.
