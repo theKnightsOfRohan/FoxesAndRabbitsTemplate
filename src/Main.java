@@ -2,7 +2,7 @@ import processing.core.*;
 
 public class Main extends PApplet {
 	Simulator simulator;
-	String saveFilePath = "./data\\foxesAndRabbitsSaved.txt";
+	String saveFilePath = "foxesAndRabbitsSaved.txt";
 	boolean paused = true;
 
 	@Override
