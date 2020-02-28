@@ -201,8 +201,10 @@ public class Simulator {
 		updatedField.clear();
 		initializeBoard(field);
 
-		if (graph != null)
+		if (graph != null) {
 			graph.clear();
+                        graph.setDataRanges(0, 500, 0, field.getHeight() * field.getWidth());
+                }
 
 		// Show the starting state in the view.
 		// view.showStatus(step, field);
