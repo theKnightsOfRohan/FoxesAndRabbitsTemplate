@@ -13,7 +13,7 @@ import processing.core.PApplet;
  * A simple predator-prey simulator, based on a field containing rabbitList and
  * foxList.
  * 
- * @author David J. Barnes and Michael Kolling. Modified by David Dobervich
+ * @author David J. Barnes and Michael Kolling. Modified by David Dobervich and Daniel Hutzley
  *         2007-2013.
  * @version 2006.03.30
  * 
