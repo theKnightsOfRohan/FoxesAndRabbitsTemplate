@@ -325,6 +325,7 @@ public class Simulator {
 	public void handleMouseClick(float mouseX, float mouseY) {
 		Location loc = view.gridLocationAt(mouseX, mouseY); // get grid at
 		// click.
+                if(loc == null) return;
 
 		for (int x = loc.getCol() - 8; x < loc.getCol() + 8; x++) {
 			for (int y = loc.getRow() - 8; y < loc.getRow() + 8; y++) {
