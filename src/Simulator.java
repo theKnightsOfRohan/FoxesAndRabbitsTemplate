@@ -13,7 +13,7 @@ import processing.core.PApplet;
  * A simple predator-prey simulator, based on a field containing rabbitList and
  * foxList.
  * 
- * @author David J. Barnes and Michael Kolling. Modified by David Dobervich
+ * @author David J. Barnes and Michael Kolling. Modified by David Dobervich and Daniel Hutzley
  *         2007-2013.
  * @version 2006.03.30
  * 
@@ -201,8 +201,10 @@ public class Simulator {
 		updatedField.clear();
 		initializeBoard(field);
 
-		if (graph != null)
+		if (graph != null) {
 			graph.clear();
+                        graph.setDataRanges(0, 500, 0, field.getHeight() * field.getWidth());
+                }
 
 		// Show the starting state in the view.
 		// view.showStatus(step, field);
@@ -323,6 +325,7 @@ public class Simulator {
 	public void handleMouseClick(float mouseX, float mouseY) {
 		Location loc = view.gridLocationAt(mouseX, mouseY); // get grid at
 		// click.
+                if(loc == null) return;
 
 		for (int x = loc.getCol() - 8; x < loc.getCol() + 8; x++) {
 			for (int y = loc.getRow() - 8; y < loc.getRow() + 8; y++) {
