@@ -1,12 +1,12 @@
+package Simulator;
+
 import java.util.Random;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
+import Animals.*;
+import Field.*;
+import Graph.*;
 import processing.core.PApplet;
 
 /**
@@ -102,7 +102,7 @@ public class Simulator {
 		graph = new Graph(p, 100, p.height - 30, p.width - 50, p.height - 110, 0,
 				0, 500, field.getHeight() * field.getWidth());
 		
-		graph.title = "Fox and Rabbit Populations";
+		graph.title = "Animals.Fox and Animals.Rabbit Populations";
 		graph.xlabel = "Time";
 		graph.ylabel = "Pop.\t\t";
 		graph.setColor(Rabbit.class, p.color(155, 155, 155));
@@ -292,7 +292,7 @@ public class Simulator {
 
 	// Perform an action when the mouse was clicked.
 	// parameters are the x, y screen coordinates the user clicked on.
-	// Note: you probably want to modify handleMouseClick(Location) which
+	// Note: you probably want to modify handleMouseClick(Field.Location) which
 	// gives you the location they clicked on in the grid.
 	public void handleMouseClick(float mouseX, float mouseY) {
 		Location loc = view.gridLocationAt(mouseX, mouseY); // get grid at
@@ -316,7 +316,7 @@ public class Simulator {
 	}
 
 	private void handleMouseClick(Location l) {
-		System.out.println("Change handleMouseClick in Simulator.java to do something!");
+		System.out.println("Change handleMouseClick in Simulator.Simulator.java to do something!");
 	}
 
 	public void handleMouseDrag(int mouseX, int mouseY) {
@@ -328,6 +328,6 @@ public class Simulator {
 	}
 
 	private void handleMouseDrag(Location l) {
-		System.out.println("Change handleMouseDrag in Simulator.java to do something!");
+		System.out.println("Change handleMouseDrag in Simulator.Simulator.java to do something!");
 	}
 }

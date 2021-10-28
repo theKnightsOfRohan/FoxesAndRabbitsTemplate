@@ -1,7 +1,11 @@
+package Animals;
+
+import Animals.*;
+import Field.*;
+import Graph.*;
+
 import java.io.Serializable;
 import java.util.List;
-import java.util.Iterator;
-import java.util.Random;
 
 /**
  * A simple model of a fox. Foxes age, move, eat rabbits, and die.

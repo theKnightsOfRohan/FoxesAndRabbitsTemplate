@@ -1,3 +1,4 @@
+import Simulator.Simulator;
 import processing.core.*;
 
 public class Main extends PApplet {

@@ -1,10 +1,7 @@
-
+package Field;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
-
-import processing.core.PApplet;
 
 /**
  * This class collects and provides some statistical data on the state 
@@ -23,7 +20,7 @@ public class FieldStats {
     private boolean countsValid = false;
 
     /**
-     * Construct a FieldStats object.
+     * Construct a Field.FieldStats object.
      */
     public FieldStats()
     {

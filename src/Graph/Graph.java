@@ -1,10 +1,12 @@
+package Graph;
+
 import java.util.HashMap;
 import java.util.Set;
 import processing.core.PApplet;
 import processing.core.PFont;
 
 /**
- * The Graph class represents and draws a 2d line graph
+ * The Graph.Graph class represents and draws a 2d line graph
  * @author David
  *
  */

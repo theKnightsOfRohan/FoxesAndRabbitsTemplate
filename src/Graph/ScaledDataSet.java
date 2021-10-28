@@ -1,3 +1,5 @@
+package Graph;
+
 import java.util.ArrayList;
 
 public class ScaledDataSet {
@@ -53,7 +55,7 @@ public class ScaledDataSet {
             y = y*yscaleval + yshiftval;
             yvals.add(y);
         } else {
-            System.out.println("ScaledDataSet couldn't add point " + x + ", "
+            System.out.println("Graph.ScaledDataSet couldn't add point " + x + ", "
                     + y + "; No y scale values set!");
         }
 
@@ -61,7 +63,7 @@ public class ScaledDataSet {
             x = x*xscaleval + this.xshiftval;
             xvals.add(x);
         } else {
-            System.out.println("ScaledDataSet couldn't add point " + x + ", "
+            System.out.println("Graph.ScaledDataSet couldn't add point " + x + ", "
                     + y + "; No x scale values set!");
         }
 

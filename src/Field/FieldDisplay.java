@@ -1,7 +1,9 @@
-
+package Field;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import Simulator.Simulator;
 import processing.core.*;
 
 public class FieldDisplay {
