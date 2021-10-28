@@ -6,7 +6,7 @@ public class Main extends PApplet {
 	boolean paused = true;
 
 	public void settings() {
-		size(640, 550);
+		size(560, 550);
 	}
 
 	@Override

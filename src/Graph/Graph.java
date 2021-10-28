@@ -122,7 +122,7 @@ public class Graph {
 	private void drawAxes() {
 		graphicsWindow.stroke(graphicsWindow.color(0));
 		graphicsWindow.line(xmin, ymin, xmin, ymax);
-		graphicsWindow.line(xmin, ymin, xmax, ymin);
+		graphicsWindow.line(xmin, ymax, xmax, ymax);
 	}
 
 	private void drawTitle() {
@@ -130,7 +130,7 @@ public class Graph {
 			graphicsWindow.fill(0);
 			graphicsWindow.textSize(titlePointSize);
 			graphicsWindow.textAlign(graphicsWindow.LEFT);
-			graphicsWindow.text(title, xmin, ymax - 10);
+			graphicsWindow.text(title, xmin + 10, ymin);
 		}
 	}
 
@@ -148,7 +148,7 @@ public class Graph {
 			graphicsWindow.fill(0);
 			graphicsWindow.textSize(labelPointSize);
 			graphicsWindow.textAlign(graphicsWindow.CENTER);
-			graphicsWindow.text(xlabel, (xmin + xmax) / 2, ymin + 22);
+			graphicsWindow.text(xlabel, (xmin + xmax) / 2, ymax + 22);
 		}
 	}
 
@@ -157,7 +157,7 @@ public class Graph {
 
 		for (float i = xmin; i < xmax; i += dxinc) {
 			graphicsWindow.stroke(100);
-			graphicsWindow.line(i, ymin, i, ymin + 4);
+			graphicsWindow.line(i, ymax, i, ymax + 4);
 		}
 	}
 
@@ -172,7 +172,7 @@ public class Graph {
 			graphicsWindow.textSize(10);
 			graphicsWindow.textAlign(graphicsWindow.CENTER);
 			text = Float.toString(c);
-			graphicsWindow.text(text, i, ymin + 10);
+			graphicsWindow.text(text, i, ymax + 10);
 			c += dataxinc;
 		}
 	}
@@ -239,7 +239,7 @@ public class Graph {
 		} else {
 			ScaledDataSet d = new ScaledDataSet();
 			d.setxScaling(dataxmin, xmin, dataxmax, xmax);
-			d.setyScaling(dataymin, ymin, dataymax, ymax);
+			d.setyScaling(dataymin, ymax, dataymax, ymin);
 			d.addPoint(x, y);
 			dataSets.put(key, d);
 			if (!colorMap.containsKey(key)) {
