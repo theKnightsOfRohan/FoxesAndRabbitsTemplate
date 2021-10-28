@@ -2,7 +2,6 @@ import processing.core.*;
 
 public class Main extends PApplet {
 	Simulator simulator;
-	String saveFilePath = "foxesAndRabbitsSaved.txt";
 	boolean paused = true;
 
 	public void settings() {
@@ -26,14 +25,6 @@ public class Main extends PApplet {
 
 	// handle key presses
 	public void keyReleased() {
-		if (key == 's') {				// 's' saves the current state to a file
-			simulator.writeToFile(saveFilePath);
-		}
-
-		if (key == 'l') { 				// 'l' loads a saved state
-			simulator.readFile(saveFilePath);
-		}
-
 		if (key == 'p') { 				// 'p' toggles paused and unpaused
 			paused = !paused;
 		}

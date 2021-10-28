@@ -258,34 +258,6 @@ public class Simulator {
 		graph.draw();
 	}
 
-	public void writeToFile(String writefile) {
-		try {
-			Record r = new Record(rabbitList, foxList, this.field, this.step);
-			FileOutputStream outStream = new FileOutputStream(writefile);
-			ObjectOutputStream objectOutputFile = new ObjectOutputStream(outStream);
-			objectOutputFile.writeObject(r);
-			objectOutputFile.close();
-		} catch (Exception e) {
-			System.out.println("Something went wrong: " + e.getMessage());
-		}
-	}
-
-	public void readFile(String readfile) {
-		try {
-			FileInputStream inputStream = new FileInputStream(readfile);
-			ObjectInputStream objectInputFile = new ObjectInputStream(inputStream);
-			Record r = (Record) objectInputFile.readObject();
-			setFoxList(r.getFoxes());
-			setRabbitList(r.getRabbits());
-			setField(r.getField());
-			setStep(r.getSteps());
-			objectInputFile.close();
-			// clear field
-		} catch (Exception e) {
-			System.out.println("Something went wrong: " + e.getMessage());
-		}
-	}
-
 	/***
 	 * Set the step number of the simulator.  (Used for restoring saved games).
 	 * @param steps
