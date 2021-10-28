@@ -5,10 +5,12 @@ public class Main extends PApplet {
 	String saveFilePath = "foxesAndRabbitsSaved.txt";
 	boolean paused = true;
 
+	public void settings() {
+		size(640, 550);
+	}
+
 	@Override
 	public void setup() {
-		size(640, 550);
-
 		this.simulator = new Simulator(80, 60);
 		this.simulator.setGUI(this);
 	}
