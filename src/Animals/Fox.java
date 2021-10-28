@@ -14,21 +14,24 @@ import java.util.List;
  * @version 2006.03.30
  */
 public class Fox implements Serializable {
+	// ----------------------------------------------------
 	// Characteristics shared by all foxes (static fields).
-	private static final int BREEDING_AGE = 3;
+	// ----------------------------------------------------
+	private static int BREEDING_AGE = 3;
 	// The age to which a fox can live.
-	private static final int MAX_AGE = 50;
+	private static int MAX_AGE = 50;
 	// The likelihood of a fox breeding.
-	private static final double BREEDING_PROBABILITY = 0.15;
+	private static double BREEDING_PROBABILITY = 0.15;
 	// The maximum number of births.
-	private static final int MAX_LITTER_SIZE = 6;
+	private static int MAX_LITTER_SIZE = 6;
 	// The food value of a single rabbit. In effect, this is the
 	// number of steps a fox can go before it has to eat again.
-	private static final int RABBIT_FOOD_VALUE = 6;
+	private static int RABBIT_FOOD_VALUE = 6;
 	// A shared random number generator to control breeding.
-	
-	// Individual characteristics (instance fields).
 
+	// -----------------------------------------------------
+	// Individual characteristics (attributes).
+	// -----------------------------------------------------
 	// The fox's age.
 	private int age;
 	// Whether the fox is alive or not.

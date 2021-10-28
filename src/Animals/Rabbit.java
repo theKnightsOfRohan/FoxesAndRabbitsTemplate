@@ -14,18 +14,23 @@ import java.util.List;
  * @version 2006.03.30
  */
 public class Rabbit implements Serializable {
-	private static final int BREEDING_AGE = 5;
+    // ----------------------------------------------------
+    // Characteristics shared by all rabbits (static fields).
+    // ----------------------------------------------------
+	private static int BREEDING_AGE = 5;
 	
     // The age to which all rabbits can live.
-    private static final int MAX_AGE = 30;
+    private static int MAX_AGE = 30;
     
     // The likelihood of a rabbit breeding.
-    private static final double BREEDING_PROBABILITY = 0.06;
+    private static double BREEDING_PROBABILITY = 0.06;
     
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 5;
-    
-    // Individual characteristics (instance fields).
+    private static int MAX_LITTER_SIZE = 5;
+
+    // -----------------------------------------------------
+    // Individual characteristics (attributes).
+    // -----------------------------------------------------
     // The rabbit's age.
     private int age;
     
