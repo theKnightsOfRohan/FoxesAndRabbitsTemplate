@@ -26,11 +26,11 @@ public class Main extends PApplet {
 
 	// handle key presses
 	public void keyReleased() {
-		if (key == 'p') { 				// 'p' toggles paused and unpaused
+		if (key == 'p' || key == 'P') { 				// 'p' toggles paused and unpaused
 			paused = !paused;
 		}
 
-		if (key == 'r') { 				// 'r' resets the simulator
+		if (key == 'r' || key == 'R') { 				// 'r' resets the simulator
 			simulator.reset();
 		}
 	}
