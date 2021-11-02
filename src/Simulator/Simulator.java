@@ -218,15 +218,14 @@ public class Simulator {
             for (int col = 0; col < field.getWidth(); col++) {
                 if (rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Fox fox = new Fox(true);
-                    fox.setLocation(col, row);
+                    fox.setLocation(row, col);
                     foxList.add(fox);
-                    field.put(fox, col, row);
+                    field.put(fox, row, col);
                 } else if (rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     Rabbit rabbit = new Rabbit(true);
-                    rabbit.setLocation(col, row);
+                    rabbit.setLocation(row, col);
                     rabbitList.add(rabbit);
-
-                    field.put(rabbit, col, row);
+                    field.put(rabbit, row, col);
                 }
             }
         }
@@ -296,8 +295,8 @@ public class Simulator {
 
         for (int x = loc.getCol() - 8; x < loc.getCol() + 8; x++) {
             for (int y = loc.getRow() - 8; y < loc.getRow() + 8; y++) {
-                Location locToCheck = new Location(x, y);
-                if (field.isInGrid(locToCheck)) {
+                Location locToCheck = new Location(y, x);
+                if (field.isLegalLocation(locToCheck)) {
                     Object animal = field.getObjectAt(locToCheck);
                     if (animal instanceof Rabbit)
                         rabbitList.remove((Rabbit) animal);

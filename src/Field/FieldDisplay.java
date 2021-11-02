@@ -47,12 +47,12 @@ public class FieldDisplay {
         colors = new LinkedHashMap<Class, Integer>();
     }
 
-    public void drawField(Field f) {
+    public void drawField(Field field) {
         Object animal;
         Integer animalColor;
-        for (int i = 0; i < f.getWidth(); i++) {
-            for (int j = 0; j < f.getHeight(); j++) {
-                animal = f.getObjectAt(i, j);
+        for (int col = 0; col < field.getWidth(); col++) {
+            for (int row = 0; row < field.getHeight(); row++) {
+                animal = field.getObjectAt(row, col);
                 if (animal != null) {
                     animalColor = getColor(animal.getClass());
                     p.fill(animalColor);
@@ -60,7 +60,7 @@ public class FieldDisplay {
                 } else {
                     p.fill(this.EMPTY_COLOR);
                 }
-                p.rect(x + i * dx, y + j * dy, dx, dy);
+                p.rect(x + col * dx, y + row * dy, dx, dy);
             }
         }
     }
@@ -88,7 +88,7 @@ public class FieldDisplay {
     
 	public Location gridLocationAt(float mx, float my) {
 		if (mx > x && mx < x + w && my > y && my < y+h) {
-			return new Location((int)Math.floor((mx-x)/dx), (int)Math.floor((my-y)/dy));
+			return new Location((int)Math.floor((my-y)/dy), (int)Math.floor((mx-x)/dx));
 		} else return null;
 	}
 }

@@ -69,7 +69,7 @@ public class Field implements Serializable {
 		this.width = width;
 		this.numberOfColumns = width;
 		this.numberOfRows = height;
-		board = new Object[width][height];
+		board = new Object[height][width];
 		animals = new HashMap<Class, ArrayList<Location>>();
 	}
 
@@ -79,7 +79,7 @@ public class Field implements Serializable {
 	public void clear() {
 		for (int row = 0; row < height; row++) {
 			for (int col = 0; col < width; col++) {
-				board[col][row] = null;
+				board[row][col] = null;
 			}
 		}
 	}
@@ -95,17 +95,8 @@ public class Field implements Serializable {
 	 * @param col
 	 *            Column coordinate of the location.
 	 */
-	public void put(Object obj, int col, int row) {
-		put(obj, new Location(col, row));
-	}
-
-	public boolean isInGrid(Location loc) {
-		return isInGrid(loc.getRow(), loc.getCol());
-	}
-	
-	public boolean isInGrid(int row, int col) {
-		return ((row >= 0) && (row < this.width) &&
-				(col >= 0) && (col < this.height));
+	public void put(Object obj, int row, int col) {
+		put(obj, new Location(row, col));
 	}
 	
 	/**
@@ -118,7 +109,7 @@ public class Field implements Serializable {
 	 *            Where to place the animal.
 	 */
 	public void put(Object obj, Location location) {
-		board[location.getCol()][location.getRow()] = obj;
+		board[location.getRow()][location.getCol()] = obj;
 	}
 
 	/**
@@ -129,7 +120,7 @@ public class Field implements Serializable {
 	 * @return The animal at the given location, or null if there is none.
 	 */
 	public Object getObjectAt(Location location) {
-		return getObjectAt(location.getCol(), location.getRow());
+		return getObjectAt(location.getRow(), location.getCol());
 	}
 
 	/**
@@ -141,8 +132,8 @@ public class Field implements Serializable {
 	 *            The desired column.
 	 * @return The animal at the given location, or null if there is none.
 	 */
-	public Object getObjectAt(int col, int row) {
-		return board[col][row];
+	public Object getObjectAt(int row, int col) {
+		return board[row][col];
 	}
 
 	/**
@@ -162,10 +153,10 @@ public class Field implements Serializable {
 		int nextRow = row + rand.nextInt(3) - 1;
 		int nextCol = col + rand.nextInt(3) - 1;
 		// Check in case the new location is outside the bounds.
-		if (nextRow < 0 || nextRow >= height || nextCol < 0 || nextCol >= width) {
+		if (!isLegalLocation(nextRow, nextCol)) {
 			return location;
 		} else if (nextRow != row || nextCol != col) {
-			return new Location(nextCol, nextRow);
+			return new Location(nextRow, nextCol);
 		} else {
 			return location;
 		}
@@ -186,20 +177,20 @@ public class Field implements Serializable {
 	public Location freeAdjacentLocation(Location location) {
 		List<Location> adjacent = adjacentLocations(location);
 		for (Location next : adjacent) {
-			if (board[next.getCol()][next.getRow()] == null) {
+			if (board[next.getRow()][next.getCol()] == null) {
 				return next;
 			}
 		}
 		// check whether current location is free
-		if (board[location.getCol()][location.getRow()] == null) {
+		if (board[location.getRow()][location.getCol()] == null) {
 			return location;
 		} else {
 			return null;
 		}
 	}
 
-	public Location freeAdjacentLocation(int x, int y) {
-		return freeAdjacentLocation(new Location(x, y));
+	public Location freeAdjacentLocation(int row, int col) {
+		return freeAdjacentLocation(new Location(row, col));
 	}
 
 	/**
@@ -223,7 +214,7 @@ public class Field implements Serializable {
 					// Exclude invalid locations and the original location.
 					if (nextCol >= 0 && nextCol < width
 							&& (roffset != 0 || coffset != 0)) {
-						locations.add(new Location(nextCol, nextRow));
+						locations.add(new Location(nextRow, nextCol));
 					}
 				}
 			}
@@ -232,8 +223,8 @@ public class Field implements Serializable {
 		return locations;
 	}
 
-	public List<Location> adjacentLocations(int x, int y) {
-		return adjacentLocations(new Location(x, y));
+	public List<Location> adjacentLocations(int row, int col) {
+		return adjacentLocations(new Location(row, col));
 	}
 
 	/**
@@ -307,23 +298,23 @@ public class Field implements Serializable {
 	 * 
 	 * @param row
 	 *            the row number
-	 * @param column
+	 * @param col
 	 *            the column number
 	 */
-	boolean isLegalLocation(int column, int row) {
-		return row >= 0 && row < getHeight() && column >= 0
-				&& column < getWidth();
+	public boolean isLegalLocation(int row, int col) {
+		return ((row >= 0) && (row < getHeight()) &&
+				(col >= 0) && (col < getWidth()));
 	}
 
-	boolean isLegalLocation(Location l) {
-		return isLegalLocation(l.getCol(), l.getRow());
+	public boolean isLegalLocation(Location l) {
+		return isLegalLocation(l.getRow(), l.getCol());
 	}
 
-	boolean isEmpty(int col, int row) {
-		return this.board[col][row] == null;
+	public boolean isEmpty(int row, int col) {
+		return this.board[row][col] == null;
 	}
 
-	boolean isEmpty(Location l) {
+	public boolean isEmpty(Location l) {
 		return isEmpty(l.getRow(), l.getCol());
 	}
 
@@ -333,13 +324,13 @@ public class Field implements Serializable {
 	 * 
 	 * @param row
 	 *            the row of the object doing the looking
-	 * @param column
+	 * @param col
 	 *            the column of the object doing the looking
 	 * @param direction
 	 *            the direction of the look
 	 * @return the object seen, or null if nothing seen.
 	 */
-	private Object look(int column, int row, int direction) {
+	private Object look(int row, int col, int direction) {
 		// decode direction into its x-y components
 		int rowDelta = rowChange(direction);
 		int columnDelta = columnChange(direction);
@@ -349,16 +340,16 @@ public class Field implements Serializable {
 		// array, thus the loop <i>will</i> terminate)
 		while (true) {
 			row = row + rowDelta;
-			column = column + columnDelta;
-			if (!isLegalLocation(row, column))
+			col = col + columnDelta;
+			if (!isLegalLocation(row, col))
 				return null;
-			if (board[column][row] != null)
-				return board[column][row];
+			if (board[row][col] != null)
+				return board[row][col];
 		}
 	}
 
 	public Object getObjectInDirection(Location l, int d) {
-		return look(l.getCol(), l.getRow(), d);
+		return look(l.getRow(), l.getCol(), d);
 	}
 
 	/**
@@ -386,7 +377,7 @@ public class Field implements Serializable {
 			row = row + rowDelta;
 			column = column + columnDelta;
 			steps++;
-			if (!isLegalLocation(row, column) || board[column][row] != null) {
+			if (!isLegalLocation(row, column) || board[row][column] != null) {
 				return steps;
 			}
 		}
