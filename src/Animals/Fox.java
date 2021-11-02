@@ -13,7 +13,7 @@ import java.util.List;
  * @author David J. Barnes and Michael Kolling.  Modified by David Dobervich 2007-2013.
  * @version 2006.03.30
  */
-public class Fox implements Serializable {
+public class Fox {
 	// ----------------------------------------------------
 	// Characteristics shared by all foxes (static fields).
 	// ----------------------------------------------------

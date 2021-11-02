@@ -252,38 +252,6 @@ public class Simulator {
         graph.draw();
     }
 
-    /***
-     * Set the step number of the simulator.  (Used for restoring saved games).
-     * @param steps
-     */
-    private void setStep(int steps) {
-        step = steps;
-    }
-
-    /***
-     * Sets the field of the simulator.  (Used for restoring saved games).
-     * @param newField
-     */
-    private void setField(Field newField) {
-        field = newField;
-    }
-
-    /***
-     * Sets the list of rabbits.  Used for restoring saved games.
-     * @param newRabbitList
-     */
-    private void setRabbitList(ArrayList<Rabbit> newRabbitList) {
-        rabbitList = newRabbitList;
-    }
-
-    /***
-     * Sets the list of foxes.  Used for restoring saved games.
-     * @param newFoxesList
-     */
-    private void setFoxList(ArrayList<Fox> newFoxesList) {
-        foxList = newFoxesList;
-    }
-
     // Perform an action when the mouse was clicked.
     // parameters are the x, y screen coordinates the user clicked on.
     // Note: you probably want to modify handleMouseClick(Field.Location) which
