@@ -24,6 +24,9 @@ public class Simulator {
     // The default height of the grid.
     private static final int DEFAULT_HEIGHT = 80;
 
+    // How many pixels to leave as a buffer between rendered elements
+    private static final int VIEW_EDGE_BUFFER = 20;
+
     // The probability that a fox will be created in any given grid position.
     private static final double FOX_CREATION_PROBABILITY = 0.02;
 
@@ -87,16 +90,15 @@ public class Simulator {
         reset();
     }
 
-    public void setGUI(PApplet p, int x, int y, int display_width,
-                       int display_height) {
+    public void setGUI(PApplet p) {
         this.graphicsWindow = p;
 
         // Create a view of the state of each location in the field.
-        view = new FieldDisplay(p, this.field, x, y, display_width, display_height);
+        view = new FieldDisplay(p, this.field, VIEW_EDGE_BUFFER, VIEW_EDGE_BUFFER, p.width - 2*VIEW_EDGE_BUFFER, p.height / 2 - 2 * VIEW_EDGE_BUFFER);
         view.setColor(Rabbit.class, p.color(155, 155, 155));
         view.setColor(Fox.class, p.color(200, 0, 255));
 
-        graph = new Graph(p, 10, display_height + 10, p.width - 10, p.height - 30, 0,
+        graph = new Graph(p, view.getLeftEdge(), view.getBottomEdge()+VIEW_EDGE_BUFFER, view.getRightEdge(), p.height-VIEW_EDGE_BUFFER, 0,
                 0, 500, field.getHeight() * field.getWidth());
 
         graph.title = "Animals.Fox and Animals.Rabbit Populations";
@@ -104,10 +106,6 @@ public class Simulator {
         graph.ylabel = "Pop.\t\t";
         graph.setColor(Rabbit.class, p.color(155, 155, 155));
         graph.setColor(Fox.class, p.color(200, 0, 255));
-    }
-
-    public void setGUI(PApplet p) {
-        setGUI(p, 10, 10, p.width - 10, 400);
     }
 
     /**

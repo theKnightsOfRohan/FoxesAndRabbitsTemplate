@@ -12,6 +12,7 @@ public class FieldDisplay {
 
     // Color used for objects that have no defined color.
     private static final int UNKNOWN_COLOR = 0x66666666;
+    private static final int DEFAULT_EDGE_BUFFER = 20;
 
     private PApplet p;  // the applet we want to display on
     private Field f;    // the field object we'll be displaying
@@ -28,9 +29,8 @@ public class FieldDisplay {
         this(p, s.getField());
     }
 
-    // todo: fix these default values
     public FieldDisplay(PApplet p, Field f) {
-        this(p, f, 10, 10, 400, 400);
+        this(p, f, DEFAULT_EDGE_BUFFER, DEFAULT_EDGE_BUFFER, p.width - 2*DEFAULT_EDGE_BUFFER, p.height/2 - 2* DEFAULT_EDGE_BUFFER);
     }
 
     public FieldDisplay(PApplet p, Field f, int x, int y, int w, int h) {
@@ -41,8 +41,8 @@ public class FieldDisplay {
         this.p = p;
         this.f = f;
 
-        this.dx = w / f.getWidth();
-        this.dy = h / f.getHeight();
+        this.dx = (float)w / f.getWidth();
+        this.dy = (float)h / f.getHeight();
 
         colors = new LinkedHashMap<Class, Integer>();
     }
@@ -91,4 +91,20 @@ public class FieldDisplay {
 			return new Location((int)Math.floor((my-y)/dy), (int)Math.floor((mx-x)/dx));
 		} else return null;
 	}
+
+    public int getBottomEdge() {
+        return y + h;
+    }
+
+    public int getTopEdge() {
+        return y;
+    }
+
+    public int getLeftEdge() {
+        return x;
+    }
+
+    public int getRightEdge() {
+        return x+w;
+    }
 }

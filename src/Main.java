@@ -2,50 +2,84 @@ import Simulator.Simulator;
 import processing.core.*;
 
 public class Main extends PApplet {
-	Simulator simulator;
-	boolean paused = true;
+    private static final int TEXT_EDGE_BUFFER = 0;
+    private Simulator simulator;
+    private boolean paused = true;
+    private int textSize = 10;
 
-	public void settings() {
-		size(560, 550);
-	}
+    public void settings() {
+        size(800, 800);        // window size in pixels
+    }
 
-	@Override
-	public void setup() {
-		this.simulator = new Simulator(80, 60);
-		this.simulator.setGUI(this);
-	}
+    @Override
+    public void setup() {
+        calculateTextSize();
+        this.simulator = new Simulator(80, 60);
+        this.simulator.setGUI(this);
+    }
 
-	@Override
-	public void draw() {
-		background(200);
-		if (!paused)
-			simulator.simulateOneStep();
-		simulator.drawField();
-		simulator.drawGraph();
-	}
+    private void calculateTextSize() {
+        textSize(textSize);
+        float tempTextWidth = 0;
+        do {
+            textSize++;
+            textSize(textSize);
+            tempTextWidth = textWidth("Press 'p' to pause and unpause the simulation");
+        } while (tempTextWidth < width - 2* TEXT_EDGE_BUFFER);
+        textSize--;
+        System.out.println("Set text size to " + textSize);
+    }
 
-	// handle key presses
-	public void keyReleased() {
-		if (key == 'p' || key == 'P') { 				// 'p' toggles paused and unpaused
-			paused = !paused;
-		}
+    @Override
+    public void draw() {
+        background(200);
+        if (!paused) {
+            simulator.simulateOneStep();
+        }
 
-		if (key == 'r' || key == 'R') { 				// 'r' resets the simulator
-			simulator.reset();
-		}
-	}
+        simulator.drawField();
+        simulator.drawGraph();
+        displayTextInstructions();
+    }
 
-	// if mouse clicked, let the simulator handle the mouse click
-	public void mouseClicked() {
-		simulator.handleMouseClick(mouseX, mouseY);
-	}
+    private void displayTextInstructions() {
+        if (paused) {
+            textAlign(CENTER, CENTER);
+            textSize(textSize);
 
-	// if mouse is dragged, let the simulator handle the mouse drag
-	public void mouseDragged() {
-		simulator.handleMouseDrag(mouseX, mouseY);
-	}
+            fill(20, 200, 35);
+            stroke(20, 200, 35);
+            rect(0, height/2 - 2*textSize, width,4*textSize);
 
-	public static void main(String[] args) {
-		PApplet.main(new String[] { "Main" });
-	}
+            fill(0);
+            stroke(0);
+            text("Press 'p' to pause and unpause the simulation", width/2, height/2 - textSize);
+            text("Press 'r' to reset the simulation", width/2, height/2 + textSize);
+        }
+    }
+
+    // handle key presses
+    public void keyReleased() {
+        if (key == 'p' || key == 'P') {                // 'p' toggles paused and unpaused
+            paused = !paused;
+        }
+
+        if (key == 'r' || key == 'R') {                // 'r' resets the simulator
+            simulator.reset();
+        }
+    }
+
+    // if mouse clicked, let the simulator handle the mouse click
+    public void mouseClicked() {
+        simulator.handleMouseClick(mouseX, mouseY);
+    }
+
+    // if mouse is dragged, let the simulator handle the mouse drag
+    public void mouseDragged() {
+        simulator.handleMouseDrag(mouseX, mouseY);
+    }
+
+    public static void main(String[] args) {
+        PApplet.main(new String[]{"Main"});
+    }
 }
