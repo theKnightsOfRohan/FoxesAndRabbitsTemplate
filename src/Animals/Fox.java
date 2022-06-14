@@ -10,8 +10,7 @@ import java.util.List;
 /**
  * A simple model of a fox. Foxes age, move, eat rabbits, and die.
  * 
- * @author David J. Barnes and Michael Kolling.  Modified by David Dobervich 2007-2013.
- * @version 2006.03.30
+ * @author David J. Barnes and Michael Kolling.  Modified by David Dobervich 2007-2022
  */
 public class Fox {
 	// ----------------------------------------------------

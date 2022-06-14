@@ -1,12 +1,10 @@
 package Field;
-
 import java.io.Serializable;
 
 /**
  * Represent a location in a rectangular grid.
  * 
- * @author David J. Barnes and Michael Kolling.  Modified by David Dobervich 2007-2013
- * @version 2006.03.30
+ * @author David J. Barnes and Michael Kolling.  Modified by David Dobervich 2007-2022
  */
 public class Location implements Serializable
 {

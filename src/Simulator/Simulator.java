@@ -14,8 +14,7 @@ import processing.core.PApplet;
  * foxList.
  *
  * @author David J. Barnes and Michael Kolling. Modified by David Dobervich and Daniel Hutzley
- * 2007-2013.
- * @version 2006.03.30
+ * 2007-2022
  */
 public class Simulator {
     // The default width for the grid.
@@ -231,6 +230,11 @@ public class Simulator {
         Collections.shuffle(foxList);
     }
 
+    /**
+     * Determine whether the simulation is still viable.
+     * I.e., should it continue to run.
+     * @return true If there is more than one species alive.
+     */
     private boolean isViable() {
         return stats.isViable(field);
     }

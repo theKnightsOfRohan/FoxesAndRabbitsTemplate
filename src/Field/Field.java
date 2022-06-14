@@ -14,8 +14,7 @@ import java.util.Random;
  * store a single animal.
  * 
  * @author David J. Barnes and Michael Kolling. Modified by David Dobervich
- *         2007-2013
- * @version 2006.03.30
+ *         2007-2022
  */
 public class Field implements Serializable {
 
