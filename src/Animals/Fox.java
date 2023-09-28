@@ -17,13 +17,13 @@ public class Fox {
 	// ----------------------------------------------------
 	// Characteristics shared by all foxes (static fields).
 	// ----------------------------------------------------
-	private static int BREEDING_AGE = 3;
+	private static int BREEDING_AGE = 15;
 	// The age to which a fox can live.
-	private static int MAX_AGE = 50;
+	private static int MAX_AGE = 40;
 	// The likelihood of a fox breeding.
-	private static double BREEDING_PROBABILITY = 0.15;
+	private static double BREEDING_PROBABILITY = 0.1;
 	// The maximum number of births.
-	private static int MAX_LITTER_SIZE = 6;
+	private static int MAX_LITTER_SIZE = 2;
 	// The food value of a single rabbit. In effect, this is the
 	// number of steps a fox can go before it has to eat again.
 	private static int RABBIT_FOOD_VALUE = 6;

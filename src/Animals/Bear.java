@@ -15,11 +15,11 @@ import java.util.List;
  * @see Location
  */
 public class Bear {
-    private static int BREEDING_AGE = 10;
+    private static int BREEDING_AGE = 20;
     private static int MAX_AGE = 50;
-    private static double BREEDING_PROBABILITY = 0.05;
-    private static int MAX_LITTER_SIZE = 2;
-    private static int FOOD_VALUE = 10;
+    private static double BREEDING_PROBABILITY = 0.03;
+    private static int MAX_LITTER_SIZE = 1;
+    private static int FOOD_VALUE = 20;
 
     // Amount of food that a rabbit or fox fills a bear's food level by
     // when eaten.

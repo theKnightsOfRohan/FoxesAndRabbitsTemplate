@@ -23,7 +23,7 @@ public class Rabbit {
     private static int MAX_AGE = 30;
 
     // The likelihood of a rabbit breeding.
-    private static double BREEDING_PROBABILITY = 0.06;
+    private static double BREEDING_PROBABILITY = 0.1;
 
     // The maximum number of births.
     private static int MAX_LITTER_SIZE = 8;
