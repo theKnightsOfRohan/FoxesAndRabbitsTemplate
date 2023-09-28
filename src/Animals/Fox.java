@@ -10,7 +10,8 @@ import java.util.List;
 /**
  * A simple model of a fox. Foxes age, move, eat rabbits, and die.
  * 
- * @author David J. Barnes and Michael Kolling.  Modified by David Dobervich 2007-2022
+ * @author David J. Barnes and Michael Kolling. Modified by David Dobervich
+ *         2007-2022
  */
 public class Fox {
 	// ----------------------------------------------------
@@ -45,14 +46,15 @@ public class Fox {
 	 * hungry) or with random age.
 	 * 
 	 * @param startWithRandomAge
-	 *            If true, the fox will have random age and hunger level.
+	 *                           If true, the fox will have random age and hunger
+	 *                           level.
 	 */
 	public Fox(boolean startWithRandomAge) {
 		age = 0;
 		alive = true;
 		if (startWithRandomAge) {
-			age = (int)(Math.random()*MAX_AGE);
-			foodLevel = (int)(Math.random()*RABBIT_FOOD_VALUE);
+			age = (int) (Math.random() * MAX_AGE);
+			foodLevel = (int) (Math.random() * RABBIT_FOOD_VALUE);
 		} else {
 			// leave age at 0
 			foodLevel = RABBIT_FOOD_VALUE;
@@ -64,11 +66,11 @@ public class Fox {
 	 * process, it might breed, die of hunger, or die of old age.
 	 * 
 	 * @param currentField
-	 *            The field currently occupied.
+	 *                       The field currently occupied.
 	 * @param updatedField
-	 *            The field to transfer to.
+	 *                       The field to transfer to.
 	 * @param babyFoxStorage
-	 *            A list to add newly born foxes to.
+	 *                       A list to add newly born foxes to.
 	 */
 	public void hunt(Field currentField, Field updatedField, List<Fox> babyFoxStorage) {
 		incrementAge();
@@ -125,9 +127,9 @@ public class Fox {
 	 * the first live rabbit is eaten.
 	 * 
 	 * @param field
-	 *            The field in which it must look.
+	 *                 The field in which it must look.
 	 * @param location
-	 *            Where in the field it is located.
+	 *                 Where in the field it is located.
 	 * @return Where food was found, or null if it wasn't.
 	 */
 	private Location findFood(Field field, Location location) {
@@ -156,7 +158,7 @@ public class Fox {
 	private int breed() {
 		int numBirths = 0;
 		if (canBreed() && Math.random() <= BREEDING_PROBABILITY) {
-			numBirths = (int)(Math.random()*MAX_LITTER_SIZE) + 1;
+			numBirths = (int) (Math.random() * MAX_LITTER_SIZE) + 1;
 		}
 		return numBirths;
 	}
@@ -193,7 +195,7 @@ public class Fox {
 	 * Set the fox's location.
 	 * 
 	 * @param location
-	 *            The fox's location.
+	 *                 The fox's location.
 	 */
 	public void setLocation(Location location) {
 		this.location = location;
@@ -201,5 +203,9 @@ public class Fox {
 
 	public void setFoodLevel(int fl) {
 		this.foodLevel = fl;
+	}
+
+	public void setEaten() {
+		alive = false;
 	}
 }

@@ -13,8 +13,9 @@ import processing.core.PApplet;
  * A simple predator-prey simulator, based on a field containing rabbitList and
  * foxList.
  *
- * @author David J. Barnes and Michael Kolling. Modified by David Dobervich and Daniel Hutzley
- * 2007-2022
+ * @author David J. Barnes and Michael Kolling. Modified by David Dobervich and
+ *         Daniel Hutzley
+ *         2007-2022
  */
 public class Simulator {
     // The default width for the grid.
@@ -30,12 +31,16 @@ public class Simulator {
     private static final double FOX_CREATION_PROBABILITY = 0.02;
 
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;
+    private static final double RABBIT_CREATION_PROBABILITY = 0.06;
+
+    // The probability that a bear will be created in any given grid position.
+    private static final double BEAR_CREATION_PROBABILITY = 0.01;
 
     // Lists of animals in the field. Separate lists are kept for ease of
     // iteration.
     private ArrayList<Rabbit> rabbitList;
     private ArrayList<Fox> foxList;
+    private ArrayList<Bear> bearList;
 
     // The current state of the field.
     private Field field;
@@ -81,6 +86,7 @@ public class Simulator {
 
         rabbitList = new ArrayList<Rabbit>();
         foxList = new ArrayList<Fox>();
+        bearList = new ArrayList<Bear>();
         field = new Field(width, height);
         updatedField = new Field(width, height);
         stats = new FieldStats();
@@ -93,11 +99,14 @@ public class Simulator {
         this.graphicsWindow = p;
 
         // Create a view of the state of each location in the field.
-        view = new FieldDisplay(p, this.field, VIEW_EDGE_BUFFER, VIEW_EDGE_BUFFER, p.width - 2*VIEW_EDGE_BUFFER, p.height / 2 - 2 * VIEW_EDGE_BUFFER);
+        view = new FieldDisplay(p, this.field, VIEW_EDGE_BUFFER, VIEW_EDGE_BUFFER, p.width - 2 * VIEW_EDGE_BUFFER,
+                p.height / 2 - 2 * VIEW_EDGE_BUFFER);
         view.setColor(Rabbit.class, p.color(155, 155, 155));
         view.setColor(Fox.class, p.color(200, 0, 255));
+        view.setColor(Bear.class, p.color(0, 255, 0));
 
-        graph = new Graph(p, view.getLeftEdge(), view.getBottomEdge()+VIEW_EDGE_BUFFER, view.getRightEdge(), p.height-VIEW_EDGE_BUFFER, 0,
+        graph = new Graph(p, view.getLeftEdge(), view.getBottomEdge() + VIEW_EDGE_BUFFER, view.getRightEdge(),
+                p.height - VIEW_EDGE_BUFFER, 0,
                 0, 500, field.getHeight() * field.getWidth());
 
         graph.title = "Animals.Fox and Animals.Rabbit Populations";
@@ -105,6 +114,7 @@ public class Simulator {
         graph.ylabel = "Pop.\t\t";
         graph.setColor(Rabbit.class, p.color(155, 155, 155));
         graph.setColor(Fox.class, p.color(200, 0, 255));
+        graph.setColor(Bear.class, p.color(0, 255, 0));
     }
 
     /**
@@ -166,6 +176,22 @@ public class Simulator {
         // Add new born foxList to the main list of foxList.
         foxList.addAll(babyFoxStorage);
 
+        // Create new list for newborn bearList.
+        ArrayList<Bear> babyBearStorage = new ArrayList<Bear>();
+
+        // Loop through Bear; let each run around.
+        for (int i = 0; i < bearList.size(); i++) {
+            Bear bear = bearList.get(i);
+            bear.hunt(field, updatedField, babyBearStorage);
+            if (!bear.isAlive()) {
+                bearList.remove(i);
+                i--;
+            }
+        }
+
+        // Add new born bearList to the main list of bearList.
+        bearList.addAll(babyBearStorage);
+
         // Swap the field and updatedField at the end of the step.
         Field temp = field;
         field = updatedField;
@@ -190,6 +216,7 @@ public class Simulator {
         step = 0;
         rabbitList.clear();
         foxList.clear();
+        bearList.clear();
         field.clear();
         updatedField.clear();
         initializeBoard(field);
@@ -223,16 +250,23 @@ public class Simulator {
                     rabbit.setLocation(row, col);
                     rabbitList.add(rabbit);
                     field.put(rabbit, row, col);
+                } else if (rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
+                    Bear bear = new Bear(true);
+                    bear.setLocation(row, col);
+                    bearList.add(bear);
+                    field.put(bear, row, col);
                 }
             }
         }
         Collections.shuffle(rabbitList);
         Collections.shuffle(foxList);
+        Collections.shuffle(bearList);
     }
 
     /**
      * Determine whether the simulation is still viable.
      * I.e., should it continue to run.
+     * 
      * @return true If there is more than one species alive.
      */
     private boolean isViable() {
@@ -261,7 +295,8 @@ public class Simulator {
     public void handleMouseClick(float mouseX, float mouseY) {
         Location loc = view.gridLocationAt(mouseX, mouseY); // get grid at
         // click.
-        if (loc == null) return;
+        if (loc == null)
+            return;
 
         for (int x = loc.getCol() - 8; x < loc.getCol() + 8; x++) {
             for (int y = loc.getRow() - 8; y < loc.getRow() + 8; y++) {
@@ -272,6 +307,8 @@ public class Simulator {
                         rabbitList.remove((Rabbit) animal);
                     if (animal instanceof Fox)
                         foxList.remove((Fox) animal);
+                    if (animal instanceof Bear)
+                        bearList.remove((Bear) animal);
                     field.put(null, locToCheck);
                     updatedField.put(null, locToCheck);
                 }
