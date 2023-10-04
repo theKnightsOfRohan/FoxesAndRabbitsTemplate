@@ -1,7 +1,6 @@
 package Animals;
 
 import Field.*;
-import java.util.List;
 
 public class Animal {
     protected static int BREEDING_AGE;

@@ -1,10 +1,6 @@
 package Animals;
 
-import Animals.*;
 import Field.*;
-import Graph.*;
-
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,6 +23,16 @@ public class Fox extends Predator {
 			}
 		};
 		setAge(startWithRandomAge);
+	}
+
+	protected void generateBaby(List<Fox> babyStorage, Field updatedField) {
+		Location birthLocation = updatedField.freeAdjacentLocation(location);
+		if (birthLocation != null) {
+			Fox baby = new Fox(false);
+			baby.setLocation(birthLocation);
+			babyStorage.add(baby);
+			updatedField.put(baby, birthLocation);
+		}
 	}
 
 }

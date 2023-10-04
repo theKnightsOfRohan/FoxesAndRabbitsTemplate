@@ -3,7 +3,6 @@ package Simulator;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.Collections;
-
 import Animals.*;
 import Field.*;
 import Graph.*;

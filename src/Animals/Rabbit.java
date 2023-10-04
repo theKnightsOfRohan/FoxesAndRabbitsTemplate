@@ -1,9 +1,6 @@
 package Animals;
 
-import Animals.*;
 import Field.*;
-import Graph.*;
-import java.io.Serializable;
 import java.util.List;
 
 /**

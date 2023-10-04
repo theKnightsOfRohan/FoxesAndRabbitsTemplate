@@ -20,4 +20,14 @@ public class Bear extends Predator {
         Bear.MAX_FOOD_VALUE = 20;
         setAge(startWithRandomAge);
     }
+
+    protected void generateBaby(List<Bear> babyStorage, Field updatedField) {
+        Location birthLocation = updatedField.freeAdjacentLocation(location);
+        if (birthLocation != null) {
+            Bear baby = new Bear(false);
+            baby.setLocation(birthLocation);
+            babyStorage.add(baby);
+            updatedField.put(baby, birthLocation);
+        }
+    }
 }

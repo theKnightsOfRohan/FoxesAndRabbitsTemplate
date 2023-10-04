@@ -23,22 +23,12 @@ public class Predator extends Animal {
         }
     }
 
-    public void hunt(Field currentField, Field updatedField, List<? super Predator> babyStorage) {
+    public void hunt(Field currentField, Field updatedField, List<? extends Predator> babyStorage) {
         incrementAge();
         if (alive) {
             int births = breed();
             for (int b = 0; b < births; b++) {
-                Predator newPredator;
-                try {
-                    newPredator = this.getClass().getConstructor(boolean.class).newInstance(false);
-                } catch (Exception e) {
-                    newPredator = new Predator(false);
-                }
-                newPredator.setFoodLevel(this.foodLevel);
-                babyStorage.add(newPredator);
-                Location loc = updatedField.randomAdjacentLocation(location);
-                newPredator.setLocation(loc);
-                updatedField.put(newPredator, loc);
+                generateBaby(babyStorage, updatedField);
             }
             Location newLocation = findFood(currentField, location);
             if (newLocation == null) {
@@ -53,6 +43,10 @@ public class Predator extends Animal {
         }
     }
 
+    private void generateBaby(List<? extends Predator> babyStorage, Field updatedField) {
+        return;
+    }
+
     protected void incrementHunger() {
         foodLevel--;
         if (foodLevel <= 0) {
@@ -64,6 +58,9 @@ public class Predator extends Animal {
         List<Location> adjacentLocations = field.adjacentLocations(location);
         for (Location where : adjacentLocations) {
             Object animal = field.getObjectAt(where);
+            if (animal instanceof Predator || animal == null)
+                continue;
+
             for (Animal prey : FOOD_VALUE.keySet()) {
                 if (typeof(animal) == typeof(prey)) {
                     prey.setEaten();
