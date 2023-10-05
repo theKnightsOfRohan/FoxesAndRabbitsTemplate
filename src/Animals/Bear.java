@@ -21,10 +21,10 @@ public class Bear extends Predator {
         setAge(startWithRandomAge);
     }
 
-    protected void generateBaby(List<Bear> babyStorage, Field updatedField) {
+    protected void generateBaby(List<Animal> babyStorage, Field updatedField) {
         Location birthLocation = updatedField.freeAdjacentLocation(location);
         if (birthLocation != null) {
-            Bear baby = new Bear(false);
+            Animal baby = new Bear(false);
             baby.setLocation(birthLocation);
             babyStorage.add(baby);
             updatedField.put(baby, birthLocation);

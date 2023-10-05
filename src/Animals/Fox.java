@@ -25,10 +25,10 @@ public class Fox extends Predator {
 		setAge(startWithRandomAge);
 	}
 
-	protected void generateBaby(List<Fox> babyStorage, Field updatedField) {
+	protected void generateBaby(List<Animal> babyStorage, Field updatedField) {
 		Location birthLocation = updatedField.freeAdjacentLocation(location);
 		if (birthLocation != null) {
-			Fox baby = new Fox(false);
+			Animal baby = new Fox(false);
 			baby.setLocation(birthLocation);
 			babyStorage.add(baby);
 			updatedField.put(baby, birthLocation);

@@ -23,7 +23,7 @@ public class Predator extends Animal {
         }
     }
 
-    public void hunt(Field currentField, Field updatedField, List<? extends Predator> babyStorage) {
+    public void act(Field currentField, Field updatedField, List<Animal> babyStorage) {
         incrementAge();
         if (alive) {
             int births = breed();
@@ -43,7 +43,7 @@ public class Predator extends Animal {
         }
     }
 
-    private void generateBaby(List<? extends Predator> babyStorage, Field updatedField) {
+    private void generateBaby(List<Animal> babyStorage, Field updatedField) {
         return;
     }
 

@@ -1,5 +1,7 @@
 package Animals;
 
+import java.util.List;
+
 import Field.*;
 
 public class Animal {
@@ -14,6 +16,10 @@ public class Animal {
     public Animal(boolean startWithRandomAge) {
         age = 0;
         alive = true;
+    }
+
+    public void act(Field currentField, Field updatedField, List<Animal> newAnimals) {
+        return;
     }
 
     protected void setAge(boolean startWithRandomAge) {

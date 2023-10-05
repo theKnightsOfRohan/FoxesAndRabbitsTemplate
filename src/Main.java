@@ -8,7 +8,7 @@ public class Main extends PApplet {
     private int textSize = 10;
 
     public void settings() {
-        size(800, 800);        // window size in pixels
+        size(800, 800); // window size in pixels
     }
 
     @Override
@@ -25,7 +25,7 @@ public class Main extends PApplet {
             textSize++;
             textSize(textSize);
             tempTextWidth = textWidth("Press 'p' to pause and unpause the simulation");
-        } while (tempTextWidth < width - 2* TEXT_EDGE_BUFFER);
+        } while (tempTextWidth < width - 2 * TEXT_EDGE_BUFFER);
         textSize--;
         System.out.println("Set text size to " + textSize);
     }
@@ -49,22 +49,22 @@ public class Main extends PApplet {
 
             fill(20, 200, 35);
             stroke(20, 200, 35);
-            rect(0, height/2 - 2*textSize, width,4*textSize);
+            rect(0, height / 2 - 2 * textSize, width, 4 * textSize);
 
             fill(0);
             stroke(0);
-            text("Press 'p' to pause and unpause the simulation", width/2, height/2 - textSize);
-            text("Press 'r' to reset the simulation", width/2, height/2 + textSize);
+            text("Press 'p' to pause and unpause the simulation", width / 2, height / 2 - textSize);
+            text("Press 'r' to reset the simulation", width / 2, height / 2 + textSize);
         }
     }
 
     // handle key presses
     public void keyReleased() {
-        if (key == 'p' || key == 'P') {                // 'p' toggles paused and unpaused
+        if (key == 'p' || key == 'P') { // 'p' toggles paused and unpaused
             paused = !paused;
         }
 
-        if (key == 'r' || key == 'R') {                // 'r' resets the simulator
+        if (key == 'r' || key == 'R') { // 'r' resets the simulator
             simulator.reset();
         }
     }
@@ -80,6 +80,6 @@ public class Main extends PApplet {
     }
 
     public static void main(String[] args) {
-        PApplet.main(new String[]{"Main"});
+        PApplet.main(new String[] { "Main" });
     }
 }

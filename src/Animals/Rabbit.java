@@ -33,12 +33,12 @@ public class Rabbit extends Animal {
      * @param updatedField      The field to transfer to.
      * @param babyRabbitStorage A list to add newly born rabbits to.
      */
-    public void run(Field updatedField, List<Rabbit> babyRabbitStorage) {
+    public void act(Field currentfield, Field updatedField, List<Animal> babyRabbitStorage) {
         incrementAge();
         if (alive) {
             int births = breed();
             for (int b = 0; b < births; b++) {
-                Rabbit newRabbit = new Rabbit(false);
+                Animal newRabbit = new Rabbit(false);
                 babyRabbitStorage.add(newRabbit);
                 Location loc = updatedField.randomAdjacentLocation(location);
                 newRabbit.setLocation(loc);
