@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Predator extends Animal {
-    protected static HashMap<Animal, Integer> FOOD_VALUE = new HashMap<Animal, Integer>();
-    protected static int MAX_FOOD_VALUE;
+    protected HashMap<Animal, Integer> FOOD_VALUE = new HashMap<Animal, Integer>();
+    protected int MAX_FOOD_VALUE;
     protected int foodLevel;
 
     public Predator(boolean startWithRandomAge) {
@@ -58,7 +58,7 @@ public class Predator extends Animal {
         List<Location> adjacentLocations = field.adjacentLocations(location);
         for (Location where : adjacentLocations) {
             Object animal = field.getObjectAt(where);
-            if (animal instanceof Predator || animal == null)
+            if (animal == null)
                 continue;
 
             for (Animal prey : FOOD_VALUE.keySet()) {

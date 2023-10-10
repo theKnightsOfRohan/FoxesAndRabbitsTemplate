@@ -13,11 +13,11 @@ import java.util.List;
 public class Fox extends Predator {
 	public Fox(boolean startWithRandomAge) {
 		super(startWithRandomAge);
-		Fox.BREEDING_AGE = 15;
-		Fox.MAX_AGE = 40;
-		Fox.BREEDING_PROBABILITY = 0.1;
-		Fox.MAX_LITTER_SIZE = 2;
-		Fox.FOOD_VALUE = new HashMap<Animal, Integer>() {
+		this.BREEDING_AGE = 15;
+		this.MAX_AGE = 40;
+		this.BREEDING_PROBABILITY = 0.1;
+		this.MAX_LITTER_SIZE = 2;
+		this.FOOD_VALUE = new HashMap<Animal, Integer>() {
 			{
 				put(new Rabbit(false), 3);
 			}

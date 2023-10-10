@@ -35,6 +35,8 @@ public class Simulator {
     // The probability that a bear will be created in any given grid position.
     private static final double BEAR_CREATION_PROBABILITY = 0.01;
 
+    private static final double HAWK_CREATION_PROBABILITY = 0.01;
+
     // Lists of animals in the field. Separate lists are kept for ease of
     // iteration.
     /*
@@ -109,6 +111,7 @@ public class Simulator {
         view.setColor(Rabbit.class, p.color(155, 155, 155));
         view.setColor(Fox.class, p.color(200, 0, 255));
         view.setColor(Bear.class, p.color(0, 255, 0));
+        view.setColor(Hawk.class, p.color(255, 0, 0));
 
         graph = new Graph(p, view.getLeftEdge(), view.getBottomEdge() + VIEW_EDGE_BUFFER, view.getRightEdge(),
                 p.height - VIEW_EDGE_BUFFER, 0,
@@ -120,6 +123,7 @@ public class Simulator {
         graph.setColor(Rabbit.class, p.color(155, 155, 155));
         graph.setColor(Fox.class, p.color(200, 0, 255));
         graph.setColor(Bear.class, p.color(0, 255, 0));
+        graph.setColor(Hawk.class, p.color(255, 0, 0));
     }
 
     /**
@@ -162,55 +166,6 @@ public class Simulator {
 
         animalList.addAll(babyStorage);
 
-        /*
-         * // New List to hold newborn rabbitList.
-         * ArrayList<Rabbit> babyRabbitStorage = new ArrayList<Rabbit>();
-         * 
-         * // Loop through all Rabbits. Let each run around.
-         * for (int i = 0; i < rabbitList.size(); i++) {
-         * Rabbit rabbit = rabbitList.get(i);
-         * rabbit.run(updatedField, babyRabbitStorage);
-         * if (!rabbit.isAlive()) {
-         * rabbitList.remove(i);
-         * i--;
-         * }
-         * }
-         * 
-         * // Add new born rabbitList to the main list of rabbitList.
-         * rabbitList.addAll(babyRabbitStorage);
-         * 
-         * // Create new list for newborn foxList.
-         * ArrayList<Fox> babyFoxStorage = new ArrayList<Fox>();
-         * 
-         * // Loop through Foxes; let each run around.
-         * for (int i = 0; i < foxList.size(); i++) {
-         * Fox fox = foxList.get(i);
-         * fox.hunt(field, updatedField, babyFoxStorage);
-         * if (!fox.isAlive()) {
-         * foxList.remove(i);
-         * i--;
-         * }
-         * }
-         * 
-         * // Add new born foxList to the main list of foxList.
-         * foxList.addAll(babyFoxStorage);
-         * 
-         * // Create new list for newborn bearList.
-         * ArrayList<Bear> babyBearStorage = new ArrayList<Bear>();
-         * 
-         * // Loop through Bear; let each run around.
-         * for (int i = 0; i < bearList.size(); i++) {
-         * Bear bear = bearList.get(i);
-         * bear.hunt(field, updatedField, babyBearStorage);
-         * if (!bear.isAlive()) {
-         * bearList.remove(i);
-         * i--;
-         * }
-         * }
-         * 
-         * // Add new born bearList to the main list of bearList.
-         * bearList.addAll(babyBearStorage);
-         */
         // Swap the field and updatedField at the end of the step.
         Field temp = field;
         field = updatedField;
@@ -277,15 +232,15 @@ public class Simulator {
                     bear.setLocation(row, col);
                     animalList.add(bear);
                     field.put(bear, row, col);
+                } else if (rand.nextDouble() <= HAWK_CREATION_PROBABILITY) {
+                    Hawk hawk = new Hawk(true);
+                    hawk.setLocation(row, col);
+                    animalList.add(hawk);
+                    field.put(hawk, row, col);
                 }
-
             }
         }
-        /*
-         * Collections.shuffle(rabbitList);
-         * Collections.shuffle(foxList);
-         * Collections.shuffle(bearList);
-         */
+
         Collections.shuffle(animalList);
     }
 
@@ -330,14 +285,6 @@ public class Simulator {
                 if (field.isLegalLocation(locToCheck)) {
                     Object animal = field.getObjectAt(locToCheck);
                     animalList.remove(animal);
-                    /*
-                     * if (animal instanceof Rabbit)
-                     * rabbitList.remove((Rabbit) animal);
-                     * if (animal instanceof Fox)
-                     * foxList.remove((Fox) animal);
-                     * if (animal instanceof Bear)
-                     * bearList.remove((Bear) animal);
-                     */
                     field.put(null, locToCheck);
                     updatedField.put(null, locToCheck);
                 }

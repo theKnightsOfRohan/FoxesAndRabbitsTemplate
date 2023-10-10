@@ -5,10 +5,10 @@ import java.util.List;
 import Field.*;
 
 public class Animal {
-    protected static int BREEDING_AGE;
-    protected static int MAX_AGE;
-    protected static int MAX_LITTER_SIZE;
-    protected static double BREEDING_PROBABILITY;
+    protected int BREEDING_AGE;
+    protected int MAX_AGE;
+    protected int MAX_LITTER_SIZE;
+    protected double BREEDING_PROBABILITY;
     protected int age;
     protected boolean alive;
     protected Location location;
